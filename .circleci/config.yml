@@ -1,0 +1,41 @@
+version: 2.1
+
+orbs:
+  react-native: react-native-community/react-native@4.4.2
+
+jobs:
+  analyse_js:
+    executor: react-native/linux_js
+    working_directory: ~/project
+    steps:
+      - attach_workspace:
+          at: .
+      - react-native/yarn_install
+      - run:
+          name: Run ESLint
+          command: yarn lint --format junit -o reports/junit/js-lint-results.xml
+      - run:
+          name: Run Test Suite
+          environment:
+            JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
+          command: yarn test --ci --testResultsProcessor="jest-junit"
+      - store_test_results:
+          path: reports/junit
+      - store_artifacts:
+          path: reports/junit
+  checkout_code:
+    executor: react-native/linux_js
+    working_directory: ~/project
+    steps:
+    - checkout
+    - persist_to_workspace:
+        root: .
+        paths: .
+
+workflows:
+  run_javascript_tests:
+    jobs:
+      - checkout_code
+      - analyse_js:
+          requires:
+            - checkout_code
