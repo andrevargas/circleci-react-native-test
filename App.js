@@ -1,5 +1,5 @@
-import React, {useState, useRef} from 'react';
-import {StyleSheet, View, TextInput, Button} from 'react-native';
+import React, { useState, useRef } from 'react';
+import { StyleSheet, View, TextInput, Button } from 'react-native';
 
 export default function App() {
   const [email, setEmail] = useState('');
@@ -18,35 +18,33 @@ export default function App() {
   }
 
   return (
-    <>
-      <View style={styles.container}>
-        <TextInput
-          value={email}
-          onChangeText={setEmail}
-          onSubmitEditing={focusPasswordInput}
-          placeholder="E-mail"
-          returnKeyType="next"
-          autoCapitalize="none"
-          keyboardType="email-address"
-          autoCorrect={false}
-          underlineColorAndroid="darkviolet"
-          style={styles.input}
-        />
-        <TextInput
-          ref={passwordRef}
-          value={password}
-          onChangeText={setPassword}
-          onSubmitEditing={handleSubmit}
-          placeholder="Password"
-          returnKeyType="go"
-          autoCapitalize="none"
-          secureTextEntry={true}
-          underlineColorAndroid="darkviolet"
-          style={styles.input}
-        />
-        <Button title="Submit" color="darkviolet" onPress={handleSubmit} />
-      </View>
-    </>
+    <View style={styles.container}>
+      <TextInput
+        value={email}
+        onChangeText={setEmail}
+        onSubmitEditing={focusPasswordInput}
+        placeholder="E-mail"
+        returnKeyType="next"
+        autoCapitalize="none"
+        keyboardType="email-address"
+        autoCorrect={false}
+        underlineColorAndroid="darkviolet"
+        style={styles.input}
+      />
+      <TextInput
+        ref={passwordRef}
+        value={password}
+        onChangeText={setPassword}
+        onSubmitEditing={handleSubmit}
+        placeholder="Password"
+        returnKeyType="go"
+        autoCapitalize="none"
+        secureTextEntry={true}
+        underlineColorAndroid="darkviolet"
+        style={styles.input}
+      />
+      <Button title="Submit" color="darkviolet" onPress={handleSubmit} />
+    </View>
   );
 }
 
